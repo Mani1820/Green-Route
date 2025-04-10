@@ -60,16 +60,30 @@ class _SignupScreenState extends State<SignupScreen> {
     return null;
   }
 
-  Future<void> _addUser(Map<String, dynamic> userData) async {
+  Future<void> _addUser(Map<String, String> map) async {
     try {
-      //await FirebaseFirestore.instance.collection('users').doc().set(userData);
-      DocumentReference docRef =
-          await FirebaseFirestore.instance.collection('users').add(userData);
-      await docRef.set({
-        'name': _nameController.text.trim(),
-        'email': _emailController.text.trim(),
-        'password': _passwordController.text.trim(),
-      });
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        DocumentReference docRef =
+            FirebaseFirestore.instance.collection('buyer').doc(user.uid);
+        await docRef.set(map);
+        print('User added to Firestore with ID: ${user.uid}');
+      } else {
+        String message;
+        if (FirebaseAuth.instance.currentUser == null) {
+          message = 'User not logged in';
+        } else {
+          message = 'An unknown error occurred';
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              message,
+            ),
+          ),
+        );
+      }
+      return;
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -212,10 +226,15 @@ class _SignupScreenState extends State<SignupScreen> {
                           RoundedButton(
                             title: 'Sign up',
                             type: ButtonType.primary,
-                            onPressed: () {
+                            onPressed: () async {
+                              await _addUser({
+                                'name': _nameController.text.trim(),
+                                'email': _emailController.text.trim(),
+                                'uid': FirebaseAuth.instance.currentUser?.uid ??
+                                    '',
+                              });
                               if (_formKey.currentState!.validate()) {
-                                _signupWithEmailAndPassword();
-                                _addUser;
+                                await _signupWithEmailAndPassword();
                               }
                             },
                           ),
