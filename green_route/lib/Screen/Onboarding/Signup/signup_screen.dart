@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
@@ -5,8 +7,109 @@ import 'package:green_route/Screen/Onboarding/Login/login_screen.dart';
 
 import '../../../Common_Widget/rounded_button.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
+
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  String? _nameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your name';
+    }
+    return null;
+  }
+
+  String? _emailValidator(String? value) {
+    var regex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    if (value == null || value.isEmpty || !regex.hasMatch(value)) {
+      return 'Please enter your email';
+    }
+    return null;
+  }
+
+  String? _passwordValidator(String? value) {
+    var hasUppercase = RegExp(r'[A-Z]');
+    var hasLowercase = RegExp(r'[a-z]');
+    var hasDigit = RegExp(r'[0-9]');
+    var hasSpecialChar = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
+    if (value == null ||
+        value.isEmpty ||
+        !hasUppercase.hasMatch(value) ||
+        !hasLowercase.hasMatch(value) ||
+        !hasDigit.hasMatch(value) ||
+        !hasSpecialChar.hasMatch(value)) {
+      return 'Please enter a valid Password';
+    }
+    return null;
+  }
+
+  String? _confirmPasswordValidator(String? value) {
+    if (value != _passwordController.text) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
+
+  Future<void> _addUser(Map<String, dynamic> userData) async {
+    try {
+      //await FirebaseFirestore.instance.collection('users').doc().set(userData);
+      DocumentReference docRef =
+          await FirebaseFirestore.instance.collection('users').add(userData);
+      await docRef.set({
+        'name': _nameController.text.trim(),
+        'email': _emailController.text.trim(),
+        'password': _passwordController.text.trim(),
+      });
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              e.toString(),
+            ),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _signupWithEmailAndPassword() async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              e.toString(),
+            ),
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +122,7 @@ class SignupScreen extends StatelessWidget {
               children: [
                 SizedBox(
                   width: size.width * 1,
+                  height: size.height * 1,
                   child: Image(
                     image: AssetImage(
                       'Assets/Images/page_view_3.png',
@@ -28,134 +132,166 @@ class SignupScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: size.width * 0.8,
+                    color: Colors.white,
                   ),
-                ),
-                height: size.height * 0.6,
-                width: size.width,
-                child: Center(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 20,
+                  Container(
+                    alignment: Alignment.bottomCenter,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withAlpha(100),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
                       ),
-                      Text(
-                        'Sign Up',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Poppins',
-                            color: ColorExtension.primaryColor),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      RoundedTextField(
-                        hintText: 'Enter your email or phone',
-                        controller: TextEditingController(),
-                      ),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      RoundedTextField(
-                        hintText: 'Enter your password',
-                        controller: TextEditingController(),
-                        obscureText: true,
-                      ),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      RoundedTextField(
-                        hintText: 'Confirm your password',
-                        controller: TextEditingController(),
-                        obscureText: true,
-                      ),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      RoundedButton(
-                        title: 'Sign up',
-                        type: ButtonType.primary,
-                        onPressed: () {},
-                      ),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      Text('or login with'),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Container(
-                            width: size.width * 1,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: const Color.fromARGB(255, 188, 44, 34),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Google',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: 'Poppins'),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                    height: size.height * 0.6,
+                    width: size.width,
+                    child: Center(
+                      child: Column(
                         children: [
+                          SizedBox(
+                            height: 20,
+                          ),
                           Text(
-                            'already have an account? ',
+                            'Sign Up',
                             style: TextStyle(
-                              fontSize: 14,
-                              color: ColorExtension.primarytextColor,
-                              fontWeight: FontWeight.w300,
-                              fontFamily: 'Poppins',
+                                fontSize: 20,
+                                fontWeight: FontWeight.w800,
+                                fontFamily: 'Poppins',
+                                color: ColorExtension.primaryColor),
+                          ),
+                          SizedBox(
+                            height: size.height * 0.015,
+                          ),
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                RoundedTextField(
+                                  hintText: 'Enter your name',
+                                  controller: _nameController,
+                                  validator: _nameValidator,
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                RoundedTextField(
+                                  hintText: 'Enter your email or phone',
+                                  controller: _emailController,
+                                  validator: _emailValidator,
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                RoundedTextField(
+                                  hintText: 'Enter your password',
+                                  controller: _passwordController,
+                                  validator: _passwordValidator,
+                                  obscureText: true,
+                                ),
+                                SizedBox(
+                                  height: size.height * 0.015,
+                                ),
+                                RoundedTextField(
+                                  hintText: 'Confirm your password',
+                                  controller: _confirmPasswordController,
+                                  validator: _confirmPasswordValidator,
+                                  obscureText: true,
+                                ),
+                              ],
                             ),
                           ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginScreen()),
-                                  (route) => false);
+                          SizedBox(
+                            height: size.height * 0.015,
+                          ),
+                          RoundedButton(
+                            title: 'Sign up',
+                            type: ButtonType.primary,
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                _signupWithEmailAndPassword();
+                                _addUser;
+                              }
                             },
-                            child: Text(
-                              'login',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: ColorExtension.primaryColor,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Poppins',
+                          ),
+                          SizedBox(
+                            height: size.height * 0.015,
+                          ),
+                          Text('or login with'),
+                          SizedBox(
+                            height: size.height * 0.015,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: InkWell(
+                              onTap: () {},
+                              child: Container(
+                                width: size.width * 1,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: const Color.fromARGB(255, 188, 44, 34),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Google',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: 'Poppins',
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
+                          ),
+                          SizedBox(
+                            height: 17,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'already have an account? ',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: ColorExtension.primarytextColor,
+                                  fontWeight: FontWeight.w300,
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginScreen()),
+                                      (route) => false);
+                                },
+                                child: Text(
+                                  'login',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: ColorExtension.primaryColor,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Poppins',
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
           ],

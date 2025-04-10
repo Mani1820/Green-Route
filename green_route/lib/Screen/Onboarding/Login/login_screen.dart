@@ -1,11 +1,72 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_button.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
 import 'package:green_route/Screen/Onboarding/Signup/signup_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final formKey = GlobalKey<FormState>();
+
+  String? _emailValidator(String? value) {
+    var regex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    if (value == null || value.isEmpty || !regex.hasMatch(value)) {
+      return 'Please enter your email';
+    }
+    return null;
+  }
+
+  String? _passwordValidator(String? value) {
+    var hasUppercase = RegExp(r'[A-Z]');
+    var hasLowercase = RegExp(r'[a-z]');
+    var hasDigit = RegExp(r'[0-9]');
+    var hasSpecialChar = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
+    if (value == null ||
+        value.isEmpty ||
+        !hasUppercase.hasMatch(value) ||
+        !hasLowercase.hasMatch(value) ||
+        !hasDigit.hasMatch(value) ||
+        !hasSpecialChar.hasMatch(value)) {
+      return 'Please enter a valid Password';
+    }
+    return null;
+  }
+
+  Future<void> _loginWithEmailAndPassword() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              e.toString(),
+            ),
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +77,12 @@ class LoginScreen extends StatelessWidget {
           children: [
             Column(
               children: [
-                SizedBox(
-                  width: size.width * 1,
+                Container(
+                  width: size.width,
+                  height: size.height * 1,
+                  decoration: BoxDecoration(
+                    color: ColorExtension.primaryColor,
+                  ),
                   child: Image(
                     image: AssetImage(
                       'Assets/Images/page_view_3.png',
@@ -41,12 +106,11 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
-              bottom: 0,
+            Center(
               child: Container(
                 alignment: Alignment.bottomCenter,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.white.withAlpha(100),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
@@ -64,36 +128,48 @@ class LoginScreen extends StatelessWidget {
                         'Login',
                         style: TextStyle(
                             fontSize: 20,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
                             fontFamily: 'Poppins',
-                            color: ColorExtension.primaryColor),
+                            color: Colors.black),
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      RoundedTextField(
-                        hintText: 'Enter your email or phone',
-                        controller: TextEditingController(),
+                      Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            RoundedTextField(
+                              hintText: 'Enter your email or phone',
+                              controller: _emailController,
+                              validator: _emailValidator,
+                            ),
+                            SizedBox(
+                              height: 17,
+                            ),
+                            RoundedTextField(
+                              hintText: 'Enter your password',
+                              controller: _passwordController,
+                              obscureText: true,
+                              validator: _passwordValidator,
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: 17,
                       ),
-                      RoundedTextField(
-                        hintText: 'Enter your password',
-                        controller: TextEditingController(),
-                        obscureText: true,
-                      ),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      Text(
-                        'Forgot Password?',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: ColorExtension.primaryColor,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Poppins',
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          'Forgot Password?',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Poppins',
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -102,7 +178,11 @@ class LoginScreen extends StatelessWidget {
                       RoundedButton(
                         title: 'Login',
                         type: ButtonType.primary,
-                        onPressed: () {},
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            _loginWithEmailAndPassword();
+                          }
+                        },
                       ),
                       SizedBox(
                         height: 17,

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "167057476419",
+    "project_id": "greenroute-35e6f",
+    "storage_bucket": "greenroute-35e6f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167057476419:android:a99f41791d883856277df6",
+        "android_client_info": {
+          "package_name": "com.example.green_route"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu1bSAZ3ODlpFh9FpDRuaI-ULaYx8uOQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
