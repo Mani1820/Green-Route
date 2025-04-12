@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:green_route/Screen/starting_screen.dart';
-import 'package:green_route/firebase_options.dart';
+import 'package:green_route/core/service/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
