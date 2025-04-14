@@ -4,6 +4,7 @@ import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_button.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
 import 'package:green_route/Screen/Onboarding/Signup/signup_screen.dart';
+import 'package:green_route/Screen/home/tab_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -181,6 +182,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             _loginWithEmailAndPassword();
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const TabScreen(),
+                                ),
+                                (route) => false);
                           }
                         },
                       ),

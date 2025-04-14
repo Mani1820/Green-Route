@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
 import 'package:green_route/Screen/Onboarding/Login/login_screen.dart';
+import 'package:green_route/Screen/home/tab_screen.dart';
 
 import '../../../Common_Widget/rounded_button.dart';
 
@@ -58,43 +58,6 @@ class _SignupScreenState extends State<SignupScreen> {
       return 'Passwords do not match';
     }
     return null;
-  }
-
-  Future<void> _addUser(Map<String, String> map) async {
-    try {
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        DocumentReference docRef =
-            FirebaseFirestore.instance.collection('buyer').doc(user.uid);
-        await docRef.set(map);
-        print('User added to Firestore with ID: ${user.uid}');
-      } else {
-        String message;
-        if (FirebaseAuth.instance.currentUser == null) {
-          message = 'User not logged in';
-        } else {
-          message = 'An unknown error occurred';
-        }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              message,
-            ),
-          ),
-        );
-      }
-      return;
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              e.toString(),
-            ),
-          ),
-        );
-      }
-    }
   }
 
   Future<void> _signupWithEmailAndPassword() async {
@@ -227,14 +190,15 @@ class _SignupScreenState extends State<SignupScreen> {
                             title: 'Sign up',
                             type: ButtonType.primary,
                             onPressed: () async {
-                              await _addUser({
-                                'name': _nameController.text.trim(),
-                                'email': _emailController.text.trim(),
-                                'uid': FirebaseAuth.instance.currentUser?.uid ??
-                                    '',
-                              });
                               if (_formKey.currentState!.validate()) {
                                 await _signupWithEmailAndPassword();
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const TabScreen(),
+                                  ),
+                                  (route) => false,
+                                );
                               }
                             },
                           ),

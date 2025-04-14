@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
+import 'package:green_route/Common_Widget/tab_button.dart';
 import 'package:green_route/Screen/home/home_screen.dart';
 
 class TabScreen extends StatefulWidget {
@@ -14,85 +15,61 @@ class _TabScreenState extends State<TabScreen> {
   Widget bucketChild = HomeScreen();
 
   late Widget bottomRow;
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   @override
   void initState() {
     super.initState();
+
     bottomRow = Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _selectedIndex = 0;
-                bucketChild = HomeScreen();
-              });
-            },
-            child: Column(
-              children: [
-                Icon(
-                  Icons.menu,
-                ),
-                Text('Menu'),
-              ],
-            ),
-          ),
+        TabScreenButton(
+          title: 'Menu',
+          icon: Icons.home_rounded,
+          selectedPage: _selectedIndex == 0,
+          onTap: () {
+            setState(() {
+              _selectedIndex = 0;
+              bucketChild = HomeScreen();
+            });
+          },
         ),
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _selectedIndex = 1;
-                bucketChild = HomeScreen();
-              });
-            },
-            child: Column(
-              children: [
-                Icon(
-                  Icons.menu,
-                ),
-                Text('Menu'),
-              ],
-            ),
-          ),
+        TabScreenButton(
+          title: 'Profile',
+          icon: Icons.person_rounded,
+          selectedPage: _selectedIndex == 1,
+          onTap: () {
+            setState(() {
+              _selectedIndex = 1;
+              bucketChild = HomeScreen();
+            });
+          },
         ),
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _selectedIndex = 3;
-                bucketChild = HomeScreen();
-              });
-            },
-            child: Column(
-              children: [
-                Icon(
-                  Icons.menu,
-                ),
-                Text('Menu'),
-              ],
-            ),
-          ),
+        const SizedBox(
+          width: 35,
         ),
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                _selectedIndex = 4;
-                bucketChild = HomeScreen();
-              });
-            },
-            child: Column(
-              children: [
-                Icon(
-                  Icons.menu,
-                ),
-                Text('Menu'),
-              ],
-            ),
-          ),
+        TabScreenButton(
+          title: 'Settings',
+          icon: Icons.settings_rounded,
+          selectedPage: _selectedIndex == 3,
+          onTap: () {
+            setState(() {
+              _selectedIndex = 3;
+              bucketChild = HomeScreen();
+            });
+          },
+        ),
+        TabScreenButton(
+          title: 'Help',
+          icon: Icons.help_rounded,
+          selectedPage: _selectedIndex == 4,
+          onTap: () {
+            setState(() {
+              _selectedIndex = 4;
+              bucketChild = HomeScreen();
+            });
+          },
         ),
       ],
     );
@@ -102,6 +79,8 @@ class _TabScreenState extends State<TabScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 10,
         surfaceTintColor: const Color.fromARGB(255, 245, 239, 164),
         child: Container(
           decoration: BoxDecoration(),
@@ -112,26 +91,22 @@ class _TabScreenState extends State<TabScreen> {
         bucket: bucket,
         child: bucketChild,
       ),
-      floatingActionButton: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: _selectedIndex == 2
-              ? Colors.white
-              : const Color.fromARGB(246, 137, 137, 137),
-        ),
-        child: IconButton(
-          icon: Icon(
-            Icons.home_rounded,
-            color: _selectedIndex == 2
-                ? ColorExtension.primaryColor
-                : const Color.fromARGB(246, 205, 205, 205),
-          ),
-          onPressed: () {
-            setState(() {
-              _selectedIndex = 2;
-              bucketChild = HomeScreen();
-            });
-          },
+      floatingActionButton: FloatingActionButton(
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+        backgroundColor: _selectedIndex == 2
+            ? ColorExtension.primaryColor
+            : const Color.fromARGB(255, 211, 211, 207),
+        shape: const CircleBorder(),
+        onPressed: () {
+          setState(() {
+            _selectedIndex = 2;
+            bucketChild = HomeScreen();
+          });
+        },
+        child: Icon(
+          size: 40,
+          Icons.home_rounded,
+          color: Colors.white,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
