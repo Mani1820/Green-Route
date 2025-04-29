@@ -1,0 +1,1 @@
+C:\flutter_apps\green_route\green_route\build\app\intermediates\cxx\Debug\5c5x1t1a\obj\arm64-v8a

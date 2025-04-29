@@ -17,8 +17,7 @@ class TabScreenButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
+      splashColor: Colors.transparent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -27,7 +26,7 @@ class TabScreenButton extends StatelessWidget {
             color: selectedPage
                 ? ColorExtension.primaryColor
                 : const Color.fromARGB(255, 55, 54, 54),
-            size: 25,
+            size: 30,
           ),
           SizedBox(
             height: 5,
@@ -35,12 +34,10 @@ class TabScreenButton extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: selectedPage
-                  ? ColorExtension.primaryColor
-                  : const Color.fromARGB(255, 55, 54, 54),
+              color: const Color.fromARGB(255, 55, 54, 54),
               fontSize: 12,
               fontWeight: FontWeight.w500,
-              fontFamily: 'popins',
+              fontFamily: 'poppins',
             ),
           ),
         ],

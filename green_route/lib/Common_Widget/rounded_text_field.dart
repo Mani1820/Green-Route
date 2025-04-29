@@ -9,7 +9,7 @@ class RoundedTextField extends StatelessWidget {
     this.validator,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
-    this.suffixIcon,
+    this.prefixIcon,
   });
 
   final String hintText;
@@ -17,7 +17,7 @@ class RoundedTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool obscureText;
   final TextInputType keyboardType;
-  final Icon? suffixIcon;
+  final Icon? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +38,14 @@ class RoundedTextField extends StatelessWidget {
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: hintText,
-            contentPadding: EdgeInsets.only(left: 25, top: 10),
+            contentPadding: EdgeInsets.only(left: 25, top: 15),
             hintStyle: TextStyle(
               color: ColorExtension.secondarytextColor,
               fontSize: 14,
               fontWeight: FontWeight.w400,
               fontFamily: 'Poppins',
             ),
-            suffixIcon: suffixIcon,
+            suffixIcon: prefixIcon,
           ),
         ),
       ),

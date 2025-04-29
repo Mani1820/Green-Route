@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
 import 'package:green_route/Screen/Onboarding/Login/login_screen.dart';
-import 'package:green_route/Screen/home/tab_screen.dart';
+import 'package:green_route/Screen/home/view/tab_screen.dart';
 
 import '../../../Common_Widget/rounded_button.dart';
 
@@ -192,7 +192,9 @@ class _SignupScreenState extends State<SignupScreen> {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 await _signupWithEmailAndPassword();
+                                
                                 Navigator.pushAndRemoveUntil(
+                                  // ignore: use_build_context_synchronously
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const TabScreen(),
