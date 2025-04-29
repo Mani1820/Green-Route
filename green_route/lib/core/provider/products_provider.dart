@@ -120,23 +120,23 @@ final vegitablesProvider = Provider((ref) {
 final List categories = [
   Categories(
     id: '1',
-    name: 'fruits',
+    name: 'Fruits',
     imageUrl: 'Assets/Images/fruits.png',
   ),
   Categories(
     id: '2',
     name: 'vegetables',
-    imageUrl: 'Assets/Images/vegetables.png',
+    imageUrl: 'Assets/Images/Veg.png',
   ),
   Categories(
     id: '3',
     name: 'dairy',
-    imageUrl: 'Assets/Images/grains.png',
+    imageUrl: 'Assets/Images/dairy.png',
   ),
   Categories(
     id: '4',
     name: 'others',
-    imageUrl: 'Assets/Images/dairy.png',
+    imageUrl: 'Assets/Images/others.jpg',
   ),
 ];
 

@@ -47,27 +47,27 @@ class _IntroScreenState extends State<IntroScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: size.height * 0.025,
+                      height: size.height * 0.02,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Text(
                         introScreenData[index].title,
                         style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 25,
                             fontWeight: FontWeight.w700,
                             color: ColorExtension.primarytextColor,
                             fontFamily: 'Poppins'),
                       ),
                     ),
                     SizedBox(
-                      height: size.height * 0.025,
+                      height: size.height * 0.02,
                     ),
                     Text(
                       introScreenData[index].description,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 15,
                           fontWeight: FontWeight.w400,
                           color: ColorExtension.secondarytextColor,
                           fontFamily: 'Poppins'),
@@ -103,16 +103,14 @@ class _IntroScreenState extends State<IntroScreen> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    if (_currentIndex < introScreenData.length - 1) {
-                      controller.animateToPage(_currentIndex + 1,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.easeInCirc);
-                    } else {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()),
-                          (route) => false);
-                    }
+                    _currentIndex < introScreenData.length - 1
+                        ? controller.animateToPage(_currentIndex + 1,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeInCirc)
+                        : Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                            (route) => false);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorExtension.primaryColor,

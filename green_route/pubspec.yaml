@@ -38,6 +38,7 @@ dependencies:
   firebase_auth: ^5.5.2
   cloud_firestore: ^5.6.6
   flutter_riverpod: ^2.6.1
+  dismissible_page: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,11 @@ flutter:
     - Assets\Images\page_view_1.png
     - Assets\Images\page_view_2.png
     - Assets\Images\page_view_3.png
+    - Assets\Images\offer_bannner.png
+    - Assets\Images\Veg.png
+    - Assets\Images\fruits.png
+    - Assets\Images\dairy.png
+    - Assets\Images\others.jpg
   
    
   # An image asset can refer to one or more resolution-specific "variants", see

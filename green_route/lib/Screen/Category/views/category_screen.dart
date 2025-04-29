@@ -1,0 +1,95 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:green_route/Common/color_extension.dart';
+import 'package:green_route/core/provider/products_provider.dart';
+
+class CategoryScreen extends ConsumerStatefulWidget {
+  const CategoryScreen({
+    super.key,
+    required this.title,
+  });
+  final String title;
+
+  @override
+  ConsumerState<CategoryScreen> createState() => _CategoryScreenState();
+}
+
+class _CategoryScreenState extends ConsumerState<CategoryScreen> {
+  @override
+  Widget build(BuildContext context) {
+    final List categories = ref
+        .read(allProductProvider)
+        .where((e) => e.category == widget.title)
+        .toList();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.title,
+          style: TextStyle(
+              color: ColorExtension.primarytextColor,
+              fontFamily: 'poppins',
+              fontWeight: FontWeight.bold,
+              fontSize: 25),
+        ),
+      ),
+      body: categories.isEmpty
+          ? const Center(
+              child: Text(
+                'No products found',
+                style: TextStyle(
+                    fontFamily: 'poppins',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+            )
+          : ListView.builder(
+              shrinkWrap: true,
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {},
+                  child: Card(
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                    color: Color.fromARGB(255, 255, 239, 214),
+                    elevation: 3,
+                    child: ListTile(
+                      leading: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Image.asset(categories[index].image),
+                      ),
+                      title: Text(
+                        categories[index].name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'poppins',
+                        ),
+                      ),
+                      subtitle: Text(
+                        categories[index].description,
+                        style: TextStyle(
+                          fontFamily: 'poppins',
+                          fontSize: 12,
+                          height: 1.5,
+                          fontWeight: FontWeight.w500,
+                          color: ColorExtension.secondarytextColor,
+                        ),
+                      ),
+                      trailing: Text(
+                        '₹${categories[index].price.toString()}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'poppins',
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+    );
+  }
+}

@@ -73,198 +73,174 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Center(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Container(
-                  width: size.width,
-                  height: size.height * 1,
-                  decoration: BoxDecoration(
-                    color: ColorExtension.primaryColor,
-                  ),
-                  child: Image(
-                    image: AssetImage(
-                      'Assets/Images/page_view_3.png',
-                    ),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ],
-            ),
-            SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 70),
-                child: Text(
-                  'Welcome to Green Route',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: ColorExtension.primarytextColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Poppins'),
-                ),
+      body: Container(
+        width: size.width,
+        height: size.height * 1,
+        decoration: BoxDecoration(
+            color: ColorExtension.primaryColor,
+            image: DecorationImage(
+              image: AssetImage(
+                'Assets/Images/page_view_3.png',
+              ),
+              fit: BoxFit.cover,
+            )),
+        child: Center(
+          child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.white.withAlpha(100),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
               ),
             ),
-            Center(
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                decoration: BoxDecoration(
-                  color: Colors.white.withAlpha(100),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+            height: size.height * 0.64,
+            width: size.width,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: size.height * 0.02,
                   ),
-                ),
-                height: size.height * 0.55,
-                width: size.width,
-                child: Center(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 20,
+                  Text(
+                    'Login',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Poppins',
+                        color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        RoundedTextField(
+                          hintText: 'Enter your email or phone',
+                          controller: _emailController,
+                          validator: _emailValidator,
+                        ),
+                        SizedBox(
+                          height: 17,
+                        ),
+                        RoundedTextField(
+                          hintText: 'Enter your password',
+                          controller: _passwordController,
+                          obscureText: true,
+                          validator: _passwordValidator,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 17,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      'Forgot Password?',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Poppins',
                       ),
-                      Text(
-                        'Login',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Poppins',
-                            color: Colors.black),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Form(
-                        key: formKey,
-                        child: Column(
-                          children: [
-                            RoundedTextField(
-                              hintText: 'Enter your email or phone',
-                              controller: _emailController,
-                              validator: _emailValidator,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 17,
+                  ),
+                  RoundedButton(
+                    title: 'Login',
+                    type: ButtonType.primary,
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        _loginWithEmailAndPassword();
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TabScreen(),
                             ),
-                            SizedBox(
-                              height: 17,
-                            ),
-                            RoundedTextField(
-                              hintText: 'Enter your password',
-                              controller: _passwordController,
-                              obscureText: true,
-                              validator: _passwordValidator,
-                            ),
-                          ],
+                            (route) => false);
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 17,
+                  ),
+                  Text('or login with'),
+                  SizedBox(
+                    height: 17,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        width: size.width * 1,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: const Color.fromARGB(255, 188, 44, 34),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Google',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'Poppins'),
+                          ),
                         ),
                       ),
-                      SizedBox(
-                        height: 17,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 17,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Don\'t have an account? ',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: ColorExtension.primarytextColor,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Poppins',
+                        ),
                       ),
-                      GestureDetector(
-                        onTap: () {},
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignupScreen(),
+                                  fullscreenDialog: true),
+                              (route) => false);
+                        },
                         child: Text(
-                          'Forgot Password?',
-                          textAlign: TextAlign.right,
+                          'Sign Up',
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.black,
+                            color: ColorExtension.primaryColor,
                             fontWeight: FontWeight.w500,
                             fontFamily: 'Poppins',
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      RoundedButton(
-                        title: 'Login',
-                        type: ButtonType.primary,
-                        onPressed: () {
-                          if (formKey.currentState!.validate()) {
-                            _loginWithEmailAndPassword();
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const TabScreen(),
-                                ),
-                                (route) => false);
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      Text('or login with'),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Container(
-                            width: size.width * 1,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: const Color.fromARGB(255, 188, 44, 34),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Google',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: 'Poppins'),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 17,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Don\'t have an account? ',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: ColorExtension.primarytextColor,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignupScreen(),
-                                      fullscreenDialog: true),
-                                  (route) => false);
-                            },
-                            child: Text(
-                              'Sign Up',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: ColorExtension.primaryColor,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Poppins',
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
-                ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
+import 'package:green_route/Screen/Category/views/category_screen.dart';
+import 'package:green_route/Screen/product/views/product_detail_screen.dart';
 import 'package:green_route/core/provider/products_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -11,11 +14,28 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  void _onTapCatagory(String category) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => CategoryScreen(
+        title: category,
+      ),
+    ));
+  }
+
+  void _onTapProduct(String id, String title) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ProductDetailScreen(
+        id: id,
+        name: title,
+      ),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    final productDetails = ref.watch(allProductProvider);
-    final categoryDetails = ref.watch(categoryProvider);
+    final productDetails = ref.read(allProductProvider);
+    final categoryDetails = ref.read(categoryProvider);
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -59,41 +79,93 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               SizedBox(
                 height: size.height * 0.02,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  'Catagory',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'poppins',
+              Center(
+                child: SizedBox(
+                  height: size.height * 0.25,
+                  child: Image.asset(
+                    'Assets/Images/offer_bannner.png',
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
               SizedBox(
                 height: size.height * 0.02,
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  'Catagory',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: ColorExtension.primarytextColor,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'poppins',
+                  ),
+                ),
+              ),
               SizedBox(
                 height: size.height * 0.2,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
                   itemCount: categoryDetails.length,
-                  shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: size.height * 0.15,
-                      margin: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage(
-                            categoryDetails.elementAt(index).imageUrl,
+                    return Column(
+                      children: [
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          onTap: () {
+                            _onTapCatagory(
+                                categoryDetails.elementAt(index).name);
+                          },
+                          child: Container(
+                            height: size.height * 0.15,
+                            width: size.width * 0.25,
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  categoryDetails.elementAt(index).imageUrl,
+                                ),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        InkWell(
+                          onTap: () {
+                            _onTapCatagory(
+                                categoryDetails.elementAt(index).name);
+                          },
+                          child: Text(
+                            categoryDetails.elementAt(index).name,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'poppins',
+                            ),
+                          ),
+                        ),
+                      ],
                     );
                   },
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.02,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  'Featured Products',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: ColorExtension.primarytextColor,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'poppins',
+                  ),
                 ),
               ),
               SizedBox(
@@ -106,15 +178,36 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   itemCount: productDetails.length,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: size.height * 0.25,
-                      width: size.width * 0.45,
-                      margin: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
+                    return InkWell(
+                      onTap: () {
+                        _onTapProduct(productDetails.elementAt(index).id,
+                            productDetails.elementAt(index).name);
+                      },
+                      child: Container(
+                        height: size.height * 0.25,
+                        width: size.width * 0.45,
+                        margin: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.shade300,
+                                  blurRadius: 5,
+                                  spreadRadius: 2,
+                                  offset: Offset(3, 2))
+                            ]),
+                        child: Column(children: [
+                          Text(
+                            productDetails.elementAt(index).name,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'poppins',
+                            ),
+                          )
+                        ]),
                       ),
-                      child: Column(children: []),
                     );
                   })
             ],
