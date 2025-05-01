@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
 import 'package:green_route/Screen/Category/views/category_screen.dart';
+import 'package:green_route/Screen/home/widgets/featured_products.dart';
 import 'package:green_route/Screen/product/views/product_detail_screen.dart';
 import 'package:green_route/core/provider/products_provider.dart';
 
@@ -183,30 +184,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         _onTapProduct(productDetails.elementAt(index).id,
                             productDetails.elementAt(index).name);
                       },
-                      child: Container(
-                        height: size.height * 0.25,
-                        width: size.width * 0.45,
-                        margin: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.shade300,
-                                  blurRadius: 5,
-                                  spreadRadius: 2,
-                                  offset: Offset(3, 2))
-                            ]),
-                        child: Column(children: [
-                          Text(
-                            productDetails.elementAt(index).name,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'poppins',
-                            ),
-                          )
-                        ]),
+                      child: Hero(
+                        tag: productDetails.elementAt(index).id,
+                        child: Container(
+                            height: size.height * 0.25,
+                            width: size.width * 0.45,
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.shade300,
+                                      blurRadius: 5,
+                                      spreadRadius: 2,
+                                      offset: Offset(3, 2))
+                                ]),
+                            child: FeaturedProducts(index: index)),
                       ),
                     );
                   })

@@ -69,10 +69,33 @@ flutter:
     - Assets\Images\page_view_2.png
     - Assets\Images\page_view_3.png
     - Assets\Images\offer_bannner.png
+    - Assets\Images\offer_banner2.jpg
+    - Assets\Images\offer_banner3.jpg
     - Assets\Images\Veg.png
     - Assets\Images\fruits.png
     - Assets\Images\dairy.png
     - Assets\Images\others.jpg
+    - Assets\Images\#broccoli.jpeg.jpg
+    - Assets\Images\#cauliflower.jpeg.jpg
+    - Assets\Images\#grapes.jpeg.jpg
+    - Assets\Images\#ladyfingers.jpeg.jpg
+    - Assets\Images\#lime.jpeg.jpg
+    - Assets\Images\#potatoes.jpeg.jpg
+    - Assets\Images\beetroot.jpg
+    - Assets\Images\carrot.jpg
+    - Assets\Images\butter.jpg
+    - Assets\Images\milk.jpg
+    - Assets\Images\capsicum.jpg
+    - Assets\Images\dragonfruite.jpg
+    - Assets\Images\garlic.jpg
+    - Assets\Images\peanuts.jpg
+    - Assets\Images\pomogranate.jpeg.jpg
+    - Assets\Images\Onion.jpeg.jpg
+    - Assets\Images\profile.jpg
+    - Assets\Images\strawberry.jpg
+    - Assets\Images\sugarcane.jpg
+    - Assets\Images\tomato.jpeg.jpg
+    - Assets\Images\watermelon.jpg
   
    
   # An image asset can refer to one or more resolution-specific "variants", see

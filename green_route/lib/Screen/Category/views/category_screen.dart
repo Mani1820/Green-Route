@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:green_route/Common/color_extension.dart';
+import 'package:green_route/Screen/product/views/product_detail_screen.dart';
 import 'package:green_route/core/provider/products_provider.dart';
 
 class CategoryScreen extends ConsumerStatefulWidget {
@@ -15,8 +16,18 @@ class CategoryScreen extends ConsumerStatefulWidget {
 }
 
 class _CategoryScreenState extends ConsumerState<CategoryScreen> {
+  void _onTapProduct(String id, String title) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ProductDetailScreen(
+        id: id,
+        name: title,
+      ),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    final allProduct = ref.watch(allProductProvider);
     final List categories = ref
         .read(allProductProvider)
         .where((e) => e.category == widget.title)
@@ -47,42 +58,50 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
               itemCount: categories.length,
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () {},
-                  child: Card(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                    color: Color.fromARGB(255, 255, 239, 214),
-                    elevation: 3,
-                    child: ListTile(
-                      leading: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: Image.asset(categories[index].image),
-                      ),
-                      title: Text(
-                        categories[index].name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'poppins',
+                  onTap: () {
+                    _onTapProduct(
+                      allProduct[index].id,
+                      allProduct[index].name,
+                    );
+                  },
+                  child: Hero(
+                    tag: allProduct[index].id,
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 15),
+                      color: Color.fromARGB(255, 255, 239, 214),
+                      elevation: 3,
+                      child: ListTile(
+                        leading: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Image.asset(categories[index].image),
                         ),
-                      ),
-                      subtitle: Text(
-                        categories[index].description,
-                        style: TextStyle(
-                          fontFamily: 'poppins',
-                          fontSize: 12,
-                          height: 1.5,
-                          fontWeight: FontWeight.w500,
-                          color: ColorExtension.secondarytextColor,
+                        title: Text(
+                          categories[index].name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            fontFamily: 'poppins',
+                          ),
                         ),
-                      ),
-                      trailing: Text(
-                        '₹${categories[index].price.toString()}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'poppins',
+                        subtitle: Text(
+                          categories[index].description,
+                          style: TextStyle(
+                            fontFamily: 'poppins',
+                            fontSize: 12,
+                            height: 1.5,
+                            fontWeight: FontWeight.w500,
+                            color: ColorExtension.secondarytextColor,
+                          ),
+                        ),
+                        trailing: Text(
+                          '₹${categories[index].price.toString()}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            fontFamily: 'poppins',
+                          ),
                         ),
                       ),
                     ),

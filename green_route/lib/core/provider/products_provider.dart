@@ -6,7 +6,7 @@ final List<Products> products = [
   Products(
     id: '1',
     name: 'Banana',
-    image: 'Assets/Images/banana.png',
+    image: 'Assets/Images/#lime.jpeg.jpg',
     price: 40.0,
     description: 'Fresh and ripe bananas, perfect for snacking or baking.',
     category: 'Fruits',
@@ -16,7 +16,7 @@ final List<Products> products = [
   Products(
     id: '2',
     name: 'Apple',
-    image: 'Assets/Images/apple.png',
+    image: 'Assets/Images/pomogranate.jpeg.jpg',
     price: 50.0,
     description: 'Juicy and delicious apples, perfect for snacking or baking.',
     category: 'Fruits',
@@ -26,7 +26,7 @@ final List<Products> products = [
   Products(
     id: '3',
     name: 'Mango',
-    image: 'Assets/Images/mango.png',
+    image: 'Assets/Images/strawberry.jpg',
     price: 60.0,
     description: 'Sweet and juicy mangos, perfect for snacking or baking.',
     category: 'Fruits',
@@ -36,7 +36,7 @@ final List<Products> products = [
   Products(
     id: '4',
     name: 'Orange',
-    image: 'Assets/Images/orange.png',
+    image: 'Assets/Images/dragonfruite.jpg',
     price: 70.0,
     description: 'Juicy and delicious oranges, perfect for snacking or baking.',
     category: 'Fruits',
@@ -46,7 +46,7 @@ final List<Products> products = [
   Products(
     id: '5',
     name: 'Grapes',
-    image: 'Assets/Images/grapes.png',
+    image: 'Assets/Images/#grapes.jpeg.jpg',
     price: 80.0,
     description: 'Fresh and sweet grapes, perfect for snacking or baking.',
     category: 'Fruits',
@@ -56,7 +56,7 @@ final List<Products> products = [
   Products(
     id: '6',
     name: 'tomato',
-    image: 'Assets/Images/pineapple.png',
+    image: 'Assets/Images/tomato.jpeg.jpg',
     price: 90.0,
     description: 'Sweet and juicy pineapples, perfect for snacking or baking.',
     category: 'vegetables',
@@ -66,7 +66,7 @@ final List<Products> products = [
   Products(
     id: '7',
     name: 'potato',
-    image: 'Assets/Images/potato.png',
+    image: 'Assets/Images/#potatoes.jpeg.jpg',
     price: 100.0,
     description: 'Sweet and juicy potatoes, perfect for snacking or baking.',
     category: 'vegetables',
@@ -76,7 +76,7 @@ final List<Products> products = [
   Products(
     id: '8',
     name: 'onion',
-    image: 'Assets/Images/onion.png',
+    image: 'Assets/Images/Onion.jpeg.jpg',
     price: 110.0,
     description: 'Sweet and juicy onions, perfect for snacking or baking.',
     category: 'vegetables',
@@ -86,7 +86,7 @@ final List<Products> products = [
   Products(
     id: '9',
     name: 'carrot',
-    image: 'Assets/Images/carrot.png',
+    image: 'Assets/Images/carrot.jpg',
     price: 120.0,
     description: 'Sweet and juicy carrots, perfect for snacking or baking.',
     category: 'vegetables',
@@ -95,10 +95,11 @@ final List<Products> products = [
   ),
   Products(
     id: '10',
-    name: 'cabbage',
-    image: 'Assets/Images/cabbage.png',
+    name: 'cauliflower',
+    image: 'Assets/Images/#cauliflower.jpeg.jpg',
     price: 130.0,
-    description: 'Sweet and juicy cabbages, perfect for snacking or baking.',
+    description:
+        ' Sweet and juicy cauliflower, perfect for snacking or baking.',
     category: 'vegetables',
     farmerName: 'John Doe',
     farmerLocation: 'Kovilpalayam',
