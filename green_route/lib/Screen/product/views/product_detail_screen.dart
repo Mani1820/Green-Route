@@ -19,9 +19,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     return DismissiblePage(
       onDismissed: () => Navigator.of(context).pop(),
-      backgroundColor: Color.fromARGB(118, 176, 255, 176),
+      backgroundColor: Color.fromARGB(255, 186, 247, 186),
       direction: DismissiblePageDismissDirection.multi,
-      reverseDuration: Duration(milliseconds: 1000),
+      reverseDuration: Duration(milliseconds: 2000),
       child: Hero(
         transitionOnUserGestures: true,
         tag: widget.id,

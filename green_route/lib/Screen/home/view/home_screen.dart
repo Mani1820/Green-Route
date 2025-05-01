@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
+import 'package:green_route/Data/banner_data.dart';
 import 'package:green_route/Screen/Category/views/category_screen.dart';
 import 'package:green_route/Screen/home/widgets/featured_products.dart';
 import 'package:green_route/Screen/product/views/product_detail_screen.dart';
@@ -32,6 +33,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ));
   }
 
+  final controller = PageController(viewportFraction: 0.9);
+  var currentBanner = 0;
+  @override
+  void initState() {
+    controller.addListener(() {
+      setState(() {
+        currentBanner = controller.page?.floor() ?? 1;
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -47,23 +60,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 padding: EdgeInsets.symmetric(
                   horizontal: 20,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Welcome User!',
-                      style: TextStyle(
-                        fontSize: 27,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'poppins',
-                      ),
-                    ),
-                    Icon(
-                      Icons.notifications_rounded,
-                      size: 30,
-                      color: Color.fromARGB(255, 55, 54, 54),
-                    ),
-                  ],
+                child: Text(
+                  'Welcome User!',
+                  style: TextStyle(
+                    fontSize: 27,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'poppins',
+                  ),
                 ),
               ),
               SizedBox(
@@ -81,14 +84,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 height: size.height * 0.02,
               ),
               Center(
-                child: SizedBox(
-                  height: size.height * 0.25,
-                  child: Image.asset(
-                    'Assets/Images/offer_bannner.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+                  child: SizedBox(
+                height: size.height * 0.3,
+                child: PageView.builder(
+                    scrollDirection: Axis.horizontal,
+                    controller: controller,
+                    itemCount: bannerData.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.all(10),
+                        width: size.width * 0.9,
+                        height: size.height * 0.3,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              bannerData.elementAt(index)['image'],
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    }),
+              )),
               SizedBox(
                 height: size.height * 0.02,
               ),

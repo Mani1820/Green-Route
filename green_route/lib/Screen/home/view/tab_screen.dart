@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/tab_button.dart';
+import 'package:green_route/Screen/Profile/views/profile_screen.dart';
 import 'package:green_route/Screen/home/view/home_screen.dart';
 
 class TabScreen extends StatefulWidget {
@@ -12,9 +13,24 @@ class TabScreen extends StatefulWidget {
 
 class _TabScreenState extends State<TabScreen> {
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget bucketChild = HomeScreen();
+  Widget bucketChild = ProfileScreen();
 
-  int selectedIndex = 2;
+  int selectedIndex = 1;
+  openSnackBar() {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Under Development',
+          style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'poppins',
+              fontWeight: FontWeight.bold),
+        ),
+        elevation: 30,
+        backgroundColor: ColorExtension.primaryColor,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +46,10 @@ class _TabScreenState extends State<TabScreen> {
             children: [
               TabScreenButton(
                 title: 'Menu',
-                icon: Icons.home_rounded,
+                icon: Icons.menu_rounded,
                 selectedPage: selectedIndex == 0,
                 onTap: () {
+                  openSnackBar();
                   setState(() {
                     selectedIndex = 0;
                     bucketChild = HomeScreen();
@@ -40,12 +57,12 @@ class _TabScreenState extends State<TabScreen> {
                 },
               ),
               TabScreenButton(
-                title: 'Profile',
-                icon: Icons.person_rounded,
-                selectedPage: selectedIndex == 1,
+                title: 'My Cart',
+                icon: Icons.shopping_cart_rounded,
+                selectedPage: selectedIndex == 3,
                 onTap: () {
                   setState(() {
-                    selectedIndex = 1;
+                    selectedIndex = 3;
                     bucketChild = HomeScreen();
                   });
                 },
@@ -54,13 +71,13 @@ class _TabScreenState extends State<TabScreen> {
                 width: 35,
               ),
               TabScreenButton(
-                title: 'Settings',
-                icon: Icons.settings_rounded,
-                selectedPage: selectedIndex == 3,
+                title: 'Profile',
+                icon: Icons.person_rounded,
+                selectedPage: selectedIndex == 1,
                 onTap: () {
                   setState(() {
-                    selectedIndex = 3;
-                    bucketChild = HomeScreen();
+                    selectedIndex = 1;
+                    bucketChild = ProfileScreen();
                   });
                 },
               ),
