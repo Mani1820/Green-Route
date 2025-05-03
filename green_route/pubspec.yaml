@@ -40,6 +40,7 @@ dependencies:
   flutter_riverpod: ^2.6.1
   dismissible_page: ^1.0.2
   image_picker: ^1.1.2
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Screen/Onboarding/Login/login_screen.dart';
+import 'package:green_route/Screen/Profile/views/edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -16,6 +17,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
         MaterialPageRoute(builder: (context) => const LoginScreen()),
         (route) => false);
     FirebaseAuth.instance.signOut();
+  }
+
+  void showAlertbox() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Logout',
+            style: TextStyle(
+              color: ColorExtension.primarytextColor,
+              fontFamily: 'poppins',
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            ),
+          ),
+          content: Text(
+            'Are you sure you want to logout?',
+            style: TextStyle(
+              color: ColorExtension.secondarytextColor,
+              fontFamily: 'poppins',
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  color: ColorExtension.primarytextColor,
+                  fontFamily: 'poppins',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                ),
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: Text(
+                'Logout',
+                style: TextStyle(
+                  color: ColorExtension.primaryColor,
+                  fontFamily: 'poppins',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                ),
+              ),
+              onPressed: () => logout(),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -94,7 +149,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         Spacer(),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const EditProfileScreen(),
+                              ),
+                            );
+                          },
                           icon: Icon(
                             Icons.arrow_forward_ios,
                           ),
@@ -269,7 +330,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 252, 254, 244)),
                     child: InkWell(
-                      onTap: logout,
+                      onTap: showAlertbox,
                       child: Row(
                         children: [
                           Icon(

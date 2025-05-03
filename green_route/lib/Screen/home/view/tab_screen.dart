@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/tab_button.dart';
+import 'package:green_route/Screen/My%20Cart/cart_list_scree.dart';
 import 'package:green_route/Screen/Profile/views/profile_screen.dart';
 import 'package:green_route/Screen/home/view/home_screen.dart';
 
@@ -13,9 +14,9 @@ class TabScreen extends StatefulWidget {
 
 class _TabScreenState extends State<TabScreen> {
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget bucketChild = ProfileScreen();
+  Widget bucketChild = HomeScreen();
 
-  int selectedIndex = 1;
+  int selectedIndex = 2;
   openSnackBar() {
     return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -63,7 +64,7 @@ class _TabScreenState extends State<TabScreen> {
                 onTap: () {
                   setState(() {
                     selectedIndex = 3;
-                    bucketChild = HomeScreen();
+                    bucketChild = CartListScreen();
                   });
                 },
               ),

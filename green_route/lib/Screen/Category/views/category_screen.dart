@@ -16,11 +16,24 @@ class CategoryScreen extends ConsumerStatefulWidget {
 }
 
 class _CategoryScreenState extends ConsumerState<CategoryScreen> {
-  void _onTapProduct(String id, String title) {
+  void _onTapProduct(
+    String id,
+    String title,
+    String image,
+    String category,
+    String description,
+    double price,
+    String farmerName,
+  ) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => ProductDetailScreen(
         id: id,
         name: title,
+        image: image,
+        category: category,
+        description: description,
+        price: price,
+        farmerName: farmerName,
       ),
     ));
   }
@@ -62,6 +75,11 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                     _onTapProduct(
                       allProduct[index].id,
                       allProduct[index].name,
+                      allProduct[index].image,
+                      allProduct[index].category.toString(),
+                      allProduct[index].description,
+                      allProduct[index].price,
+                      allProduct[index].farmerName.toString(),
                     );
                   },
                   child: Hero(

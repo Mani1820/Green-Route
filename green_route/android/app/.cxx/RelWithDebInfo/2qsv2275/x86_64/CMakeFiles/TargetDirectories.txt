@@ -1,0 +1,2 @@
+C:/flutter_apps/green_route/green_route/android/app/.cxx/RelWithDebInfo/2qsv2275/x86_64/CMakeFiles/edit_cache.dir
+C:/flutter_apps/green_route/green_route/android/app/.cxx/RelWithDebInfo/2qsv2275/x86_64/CMakeFiles/rebuild_cache.dir

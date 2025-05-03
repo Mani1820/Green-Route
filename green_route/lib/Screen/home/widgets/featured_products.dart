@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:green_route/Common/color_extension.dart';
+import 'package:green_route/Models/product_model.dart';
 import 'package:green_route/core/provider/products_provider.dart';
 
 class FeaturedProducts extends ConsumerStatefulWidget {
-  const FeaturedProducts({super.key, required this.index});
+   FeaturedProducts({super.key, required this.index});
 
   final int index;
+ final List<Products> cartProducts = [];
 
   @override
   ConsumerState<FeaturedProducts> createState() => _FeaturedProductsState();
@@ -17,6 +19,7 @@ class _FeaturedProductsState extends ConsumerState<FeaturedProducts> {
   void onTapFav() {
     setState(() {
       isFav = !isFav;
+      widget.cartProducts.add(ref.read(allProductProvider)[widget.index]);
     });
   }
 

@@ -5,42 +5,46 @@ import 'package:green_route/Models/product_model.dart';
 final List<Products> products = [
   Products(
     id: '1',
-    name: 'Banana',
+    name: 'Lime',
     image: 'Assets/Images/#lime.jpeg.jpg',
     price: 40.0,
-    description: 'Fresh and ripe bananas, perfect for snacking or baking.',
+    description:
+        ' A small, green citrus fruit known for its tangy and refreshing flavor, often used in drinks and cooking.',
     category: 'Fruits',
-    farmerName: 'John Doe',
+    farmerName: 'Manikandan',
     farmerLocation: 'Kallipalayam',
   ),
   Products(
     id: '2',
-    name: 'Apple',
+    name: 'Pomogranate',
     image: 'Assets/Images/pomogranate.jpeg.jpg',
     price: 50.0,
-    description: 'Juicy and delicious apples, perfect for snacking or baking.',
+    description:
+        'A round fruit with a tough outer skin and juicy, ruby-red seeds inside, rich in antioxidants and nutrients.',
     category: 'Fruits',
-    farmerName: 'John Doe',
+    farmerName: 'Ram kumar',
     farmerLocation: 'Kallipalayam',
   ),
   Products(
     id: '3',
-    name: 'Mango',
+    name: 'Starwberry',
     image: 'Assets/Images/strawberry.jpg',
     price: 60.0,
-    description: 'Sweet and juicy mangos, perfect for snacking or baking.',
+    description:
+        'A bright red, heart-shaped fruit with a sweet and slightly tart taste, popular in desserts and smoothies.',
     category: 'Fruits',
-    farmerName: 'John Doe',
+    farmerName: 'Yogesh',
     farmerLocation: 'Kovilpalayam',
   ),
   Products(
     id: '4',
-    name: 'Orange',
+    name: 'dragon fruite',
     image: 'Assets/Images/dragonfruite.jpg',
     price: 70.0,
-    description: 'Juicy and delicious oranges, perfect for snacking or baking.',
+    description:
+        'An exotic fruit with a vibrant pink or yellow skin and white or red flesh speckled with black seeds, mildly sweet and hydrating.',
     category: 'Fruits',
-    farmerName: 'John Doe',
+    farmerName: 'Kathir',
     farmerLocation: 'Kovilpalayam',
   ),
   Products(

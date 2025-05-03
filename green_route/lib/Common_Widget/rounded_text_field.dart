@@ -45,7 +45,7 @@ class RoundedTextField extends StatelessWidget {
               fontWeight: FontWeight.w400,
               fontFamily: 'Poppins',
             ),
-            suffixIcon: prefixIcon,
+            prefixIcon: prefixIcon,
           ),
         ),
       ),
