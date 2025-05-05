@@ -1,16 +1,16 @@
 class Products {
-  const Products({ 
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.price,
-    required this.image,
-    this.category,
-    this.farmerName,
-    this.farmerLocation,
-    this.rating,
-    this.stock
-  });
+  const Products(
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.price,
+      required this.image,
+      this.category,
+      this.farmerName,
+      this.farmerLocation,
+      this.rating,
+      this.stock,
+      required this.upi});
 
   final String id;
   final String name;
@@ -22,4 +22,5 @@ class Products {
   final String? farmerLocation;
   final double? rating;
   final int? stock;
+  final String upi;
 }

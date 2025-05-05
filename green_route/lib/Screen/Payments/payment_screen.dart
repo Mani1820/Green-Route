@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key, required this.name, required this.upi});
+  const PaymentScreen(
+      {super.key, required this.name, required this.upi, required this.price});
   final String name;
   final String upi;
+  final String price;
+  
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
 }
@@ -12,6 +15,13 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen>
     with TickerProviderStateMixin {
   bool isTap = false; //State variable to check if the button is tapped
+  
+  late String data;
+  @override
+  void initState() {
+    super.initState();
+    data = 'https://getupilink.com/upi/${widget.upi}?am=${widget.price}';
+  }
 
   final ButtonStyle styledEButton = //Button style handled
       ElevatedButton.styleFrom(
@@ -22,13 +32,7 @@ class _PaymentScreenState extends State<PaymentScreen>
       220,
       50,
     ),
-    textStyle: TextStyle(
-      fontSize: 18,
-      fontWeight: FontWeight.w500,
-    ),
   );
-
-  final String data = 'https://www.google.com/';
 
   double opacityValue = 0;
 

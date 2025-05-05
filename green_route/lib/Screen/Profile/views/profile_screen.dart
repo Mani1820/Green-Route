@@ -88,253 +88,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          Center(
-            child: Column(
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage: AssetImage('Assets/Images/profile.jpg'),
-                ),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
-                Text(
-                  'User',
-                  style: TextStyle(
-                    color: ColorExtension.primarytextColor,
-                    fontFamily: 'poppins',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 22,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Center(
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage('Assets/Images/profile.jpg'),
                   ),
-                ),
-                Text(
-                  's9Kz6@example.com',
-                  style: TextStyle(
-                    color: ColorExtension.secondarytextColor,
-                    fontFamily: 'poppins',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
+                  SizedBox(
+                    height: size.height * 0.02,
                   ),
-                ),
-                SizedBox(
-                  height: size.height * 0.05,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                  child: Container(
-                    height: size.height * 0.07,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 252, 254, 244)),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.person_rounded,
-                          color: ColorExtension.primaryColor,
-                          size: 35,
-                        ),
-                        SizedBox(
-                          width: size.width * 0.15,
-                        ),
-                        Text(
-                          'About Me',
-                          style: TextStyle(
-                            color: ColorExtension.primarytextColor,
-                            fontFamily: 'poppins',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Spacer(),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const EditProfileScreen(),
-                              ),
-                            );
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward_ios,
-                          ),
-                          color: ColorExtension.primarytextColor,
-                          iconSize: 20,
-                        ),
-                      ],
+                  Text(
+                    'User',
+                    style: TextStyle(
+                      color: ColorExtension.primarytextColor,
+                      fontFamily: 'poppins',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 22,
                     ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                  child: Container(
-                    height: size.height * 0.07,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 252, 254, 244)),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.shopping_bag_rounded,
-                          color: ColorExtension.primaryColor,
-                          size: 35,
-                        ),
-                        SizedBox(
-                          width: size.width * 0.15,
-                        ),
-                        Text(
-                          'My Orders',
-                          style: TextStyle(
-                            color: ColorExtension.primarytextColor,
-                            fontFamily: 'poppins',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Spacer(),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.arrow_forward_ios,
-                          ),
-                          color: ColorExtension.primarytextColor,
-                          iconSize: 20,
-                        ),
-                      ],
+                  Text(
+                    's9Kz6@example.com',
+                    style: TextStyle(
+                      color: ColorExtension.secondarytextColor,
+                      fontFamily: 'poppins',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
                     ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                  child: Container(
-                    height: size.height * 0.07,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 252, 254, 244)),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.favorite_rounded,
-                          color: ColorExtension.primaryColor,
-                          size: 35,
-                        ),
-                        SizedBox(
-                          width: size.width * 0.15,
-                        ),
-                        Text(
-                          'My Wishlist',
-                          style: TextStyle(
-                            color: ColorExtension.primarytextColor,
-                            fontFamily: 'poppins',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Spacer(),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.arrow_forward_ios,
-                          ),
-                          color: ColorExtension.primarytextColor,
-                          iconSize: 20,
-                        ),
-                      ],
-                    ),
+                  SizedBox(
+                    height: size.height * 0.05,
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                  child: Container(
-                    height: size.height * 0.07,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 252, 254, 244)),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.location_on_rounded,
-                          color: ColorExtension.primaryColor,
-                          size: 35,
-                        ),
-                        SizedBox(
-                          width: size.width * 0.15,
-                        ),
-                        Text(
-                          'Change Address',
-                          style: TextStyle(
-                            color: ColorExtension.primarytextColor,
-                            fontFamily: 'poppins',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Spacer(),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.arrow_forward_ios,
-                          ),
-                          color: ColorExtension.primarytextColor,
-                          iconSize: 20,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                  child: Container(
-                    height: size.height * 0.07,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 252, 254, 244)),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.notifications_rounded,
-                          color: ColorExtension.primaryColor,
-                          size: 35,
-                        ),
-                        SizedBox(
-                          width: size.width * 0.15,
-                        ),
-                        Text(
-                          'Notification',
-                          style: TextStyle(
-                            color: ColorExtension.primarytextColor,
-                            fontFamily: 'poppins',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Spacer(),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.arrow_forward_ios,
-                          ),
-                          color: ColorExtension.primarytextColor,
-                          iconSize: 20,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Container(
-                    height: size.height * 0.07,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 252, 254, 244)),
-                    child: InkWell(
-                      onTap: showAlertbox,
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                    child: Container(
+                      height: size.height * 0.07,
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 252, 254, 244)),
                       child: Row(
                         children: [
                           Icon(
-                            Icons.logout_rounded,
+                            Icons.person_rounded,
                             color: ColorExtension.primaryColor,
                             size: 35,
                           ),
@@ -342,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: size.width * 0.15,
                           ),
                           Text(
-                            'Sign Out',
+                            'About Me',
                             style: TextStyle(
                               color: ColorExtension.primarytextColor,
                               fontFamily: 'poppins',
@@ -350,26 +148,231 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fontSize: 20,
                             ),
                           ),
+                          Spacer(),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const EditProfileScreen(),
+                                ),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                            ),
+                            color: ColorExtension.primarytextColor,
+                            iconSize: 20,
+                          ),
                         ],
                       ),
                     ),
                   ),
-                )
-              ],
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                    child: Container(
+                      height: size.height * 0.07,
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 252, 254, 244)),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.shopping_bag_rounded,
+                            color: ColorExtension.primaryColor,
+                            size: 35,
+                          ),
+                          SizedBox(
+                            width: size.width * 0.15,
+                          ),
+                          Text(
+                            'My Orders',
+                            style: TextStyle(
+                              color: ColorExtension.primarytextColor,
+                              fontFamily: 'poppins',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Spacer(),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                            ),
+                            color: ColorExtension.primarytextColor,
+                            iconSize: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                    child: Container(
+                      height: size.height * 0.07,
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 252, 254, 244)),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.favorite_rounded,
+                            color: ColorExtension.primaryColor,
+                            size: 35,
+                          ),
+                          SizedBox(
+                            width: size.width * 0.15,
+                          ),
+                          Text(
+                            'My Wishlist',
+                            style: TextStyle(
+                              color: ColorExtension.primarytextColor,
+                              fontFamily: 'poppins',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Spacer(),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                            ),
+                            color: ColorExtension.primarytextColor,
+                            iconSize: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                    child: Container(
+                      height: size.height * 0.07,
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 252, 254, 244)),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.location_on_rounded,
+                            color: ColorExtension.primaryColor,
+                            size: 35,
+                          ),
+                          SizedBox(
+                            width: size.width * 0.15,
+                          ),
+                          Text(
+                            'Change Address',
+                            style: TextStyle(
+                              color: ColorExtension.primarytextColor,
+                              fontFamily: 'poppins',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Spacer(),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                            ),
+                            color: ColorExtension.primarytextColor,
+                            iconSize: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                    child: Container(
+                      height: size.height * 0.07,
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 252, 254, 244)),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.notifications_rounded,
+                            color: ColorExtension.primaryColor,
+                            size: 35,
+                          ),
+                          SizedBox(
+                            width: size.width * 0.15,
+                          ),
+                          Text(
+                            'Notification',
+                            style: TextStyle(
+                              color: ColorExtension.primarytextColor,
+                              fontFamily: 'poppins',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Spacer(),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_forward_ios,
+                            ),
+                            color: ColorExtension.primarytextColor,
+                            iconSize: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: Container(
+                      height: size.height * 0.07,
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 252, 254, 244)),
+                      child: InkWell(
+                        onTap: showAlertbox,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.logout_rounded,
+                              color: ColorExtension.primaryColor,
+                              size: 35,
+                            ),
+                            SizedBox(
+                              width: size.width * 0.15,
+                            ),
+                            Text(
+                              'Sign Out',
+                              style: TextStyle(
+                                color: ColorExtension.primarytextColor,
+                                fontFamily: 'poppins',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            top: size.height * 0.07,
-            left: size.width * 0.53,
-            child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.camera_enhance_rounded,
-                  size: 30,
-                  color: ColorExtension.primaryColor,
-                )),
-          ),
-        ],
+            Positioned(
+              top: size.height * 0.07,
+              left: size.width * 0.53,
+              child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.camera_enhance_rounded,
+                    size: 30,
+                    color: ColorExtension.primaryColor,
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }

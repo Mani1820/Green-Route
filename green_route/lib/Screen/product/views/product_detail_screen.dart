@@ -44,6 +44,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+  var productPrice= widget.price * value;
     return DismissiblePage(
       onDismissed: () => Navigator.of(context).pop(),
       backgroundColor: Color.fromARGB(255, 186, 247, 186),
@@ -218,7 +219,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                       padding: const EdgeInsets.only(
                                           bottom: 20, left: 10, right: 10),
                                       child: Text(
-                                        'Rs. ${(widget.price * value).toString()}',
+                                        'Rs. ${productPrice.toString()}',
                                         style: TextStyle(
                                           fontFamily: 'poppins',
                                           fontWeight: FontWeight.w700,
@@ -238,6 +239,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                                       PaymentScreen(
                                                     name: widget.farmerName,
                                                     upi: 'yogeshjosh333@okaxis',
+                                                    price: productPrice.toString(),
                                                   ),
                                                 ),
                                               );
