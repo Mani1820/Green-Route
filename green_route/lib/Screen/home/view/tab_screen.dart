@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/tab_button.dart';
+import 'package:green_route/Screen/Help/Views/help_screen.dart';
+import 'package:green_route/Screen/Menu/views/menu_screen.dart';
 import 'package:green_route/Screen/My%20Cart/cart_list_scree.dart';
 import 'package:green_route/Screen/Profile/views/profile_screen.dart';
 import 'package:green_route/Screen/home/view/home_screen.dart';
@@ -29,6 +31,14 @@ class _TabScreenState extends State<TabScreen> {
         ),
         elevation: 30,
         backgroundColor: ColorExtension.primaryColor,
+        duration: const Duration(seconds: 2),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            40,
+          ),
+        ),
+        showCloseIcon: true,
+        closeIconColor: Colors.white,
       ),
     );
   }
@@ -53,7 +63,7 @@ class _TabScreenState extends State<TabScreen> {
                   openSnackBar();
                   setState(() {
                     selectedIndex = 0;
-                    bucketChild = HomeScreen();
+                    bucketChild = MenuScreen();
                   });
                 },
               ),
@@ -89,7 +99,7 @@ class _TabScreenState extends State<TabScreen> {
                 onTap: () {
                   setState(() {
                     selectedIndex = 4;
-                    bucketChild = HomeScreen();
+                    bucketChild = HelpScreen();
                   });
                 },
               ),

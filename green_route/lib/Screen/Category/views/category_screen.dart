@@ -24,6 +24,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
     String description,
     double price,
     String farmerName,
+    String upi,
   ) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => ProductDetailScreen(
@@ -34,6 +35,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
         description: description,
         price: price,
         farmerName: farmerName,
+        upi: upi,
       ),
     ));
   }
@@ -80,6 +82,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
                       allProduct[index].description,
                       allProduct[index].price,
                       allProduct[index].farmerName.toString(),
+                      allProduct[index].upi.toString(),
                     );
                   },
                   child: Hero(

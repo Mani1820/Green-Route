@@ -24,7 +24,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ));
   }
 
-  void _onTapProduct(String id, String title, String image, String category, String description, double price, String farmerName,) {
+  void _onTapProduct(String id, String title, String image, String category,
+      String description, double price, String farmerName, String upi) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => ProductDetailScreen(
         id: id,
@@ -34,6 +35,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         description: description,
         price: price,
         farmerName: farmerName,
+        upi: upi,
       ),
     ));
   }
@@ -203,13 +205,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        _onTapProduct(productDetails.elementAt(index).id,
+                        _onTapProduct(
+                            productDetails.elementAt(index).id,
                             productDetails.elementAt(index).name,
                             productDetails.elementAt(index).image,
                             productDetails.elementAt(index).category.toString(),
                             productDetails.elementAt(index).description,
                             productDetails.elementAt(index).price,
-                            productDetails.elementAt(index).farmerName.toString());
+                            productDetails
+                                .elementAt(index)
+                                .farmerName
+                                .toString(),
+                            productDetails.elementAt(index).upi.toString());
                       },
                       child: Hero(
                         tag: productDetails.elementAt(index).id,

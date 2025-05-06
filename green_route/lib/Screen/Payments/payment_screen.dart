@@ -20,7 +20,7 @@ class _PaymentScreenState extends State<PaymentScreen>
   @override
   void initState() {
     super.initState();
-    data = 'https://getupilink.com/upi/${widget.upi}?am=${widget.price}';
+    data = 'upi://pay?pa=${widget.upi}&pn=${widget.name}&am=${widget.price}&cu=INR';
   }
 
   final ButtonStyle styledEButton = //Button style handled

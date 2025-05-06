@@ -13,6 +13,7 @@ class ProductDetailScreen extends StatefulWidget {
     required this.price,
     required this.category,
     required this.farmerName,
+    required this.upi,
   });
   final String id;
   final String name;
@@ -21,6 +22,7 @@ class ProductDetailScreen extends StatefulWidget {
   final double price;
   final String? category;
   final String farmerName;
+  final String upi;
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -44,7 +46,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-  var productPrice= widget.price * value;
+    var productPrice = widget.price * value;
     return DismissiblePage(
       onDismissed: () => Navigator.of(context).pop(),
       backgroundColor: Color.fromARGB(255, 186, 247, 186),
@@ -234,12 +236,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                           : () {
                                               Navigator.push(
                                                 context,
-                                                MaterialPageRoute(  
+                                                MaterialPageRoute(
                                                   builder: (context) =>
                                                       PaymentScreen(
                                                     name: widget.farmerName,
-                                                    upi: 'yogeshjosh333@okaxis',
-                                                    price: productPrice.toString(),
+                                                    upi: widget.upi,
+                                                    price:
+                                                        productPrice.toString(),
                                                   ),
                                                 ),
                                               );
@@ -267,7 +270,49 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                       ),
                     ],
-                  )
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back),
+                    color: ColorExtension.primarytextColor,
+                  ),
+                  Positioned(
+                    right: 10,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.more_vert_outlined),
+                      color: ColorExtension.primarytextColor,
+                    ),
+                  ),
+                  Positioned(
+                    right: 20,
+                    top: size.height * 0.31,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.favorite_border_outlined),
+                          color: ColorExtension.primarytextColor,
+                          iconSize: 36,
+                        ),
+                        SizedBox(
+                          height: size.height * 0.02,
+                        ),
+                        Text(
+                          'Rs. ${widget.price.toString()}',
+                          style: TextStyle(
+                              fontFamily: 'poppins',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 25,
+                              color: ColorExtension.primaryColor),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

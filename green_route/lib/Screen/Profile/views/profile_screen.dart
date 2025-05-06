@@ -19,6 +19,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     FirebaseAuth.instance.signOut();
   }
 
+  void showSnackbar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('This feature is under development',
+            style: TextStyle(fontFamily: 'poppins')),
+        duration: Duration(seconds: 2),
+        backgroundColor: ColorExtension.primaryColor,
+        showCloseIcon: true,
+        closeIconColor: ColorExtension.primarytextColor,
+      ),
+    );
+  }
+
   void showAlertbox() {
     showDialog(
       context: context,
@@ -129,42 +142,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: size.height * 0.07,
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 252, 254, 244)),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.person_rounded,
-                            color: ColorExtension.primaryColor,
-                            size: 35,
-                          ),
-                          SizedBox(
-                            width: size.width * 0.15,
-                          ),
-                          Text(
-                            'About Me',
-                            style: TextStyle(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const EditProfileScreen(),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.person_rounded,
+                              color: ColorExtension.primaryColor,
+                              size: 35,
+                            ),
+                            SizedBox(
+                              width: size.width * 0.15,
+                            ),
+                            Text(
+                              'About Me',
+                              style: TextStyle(
+                                color: ColorExtension.primarytextColor,
+                                fontFamily: 'poppins',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Spacer(),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const EditProfileScreen(),
+                                  ),
+                                );
+                              },
+                              icon: Icon(
+                                Icons.arrow_forward_ios,
+                              ),
                               color: ColorExtension.primarytextColor,
-                              fontFamily: 'poppins',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
+                              iconSize: 20,
                             ),
-                          ),
-                          Spacer(),
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const EditProfileScreen(),
-                                ),
-                              );
-                            },
-                            icon: Icon(
-                              Icons.arrow_forward_ios,
-                            ),
-                            color: ColorExtension.primarytextColor,
-                            iconSize: 20,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -175,35 +197,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: size.height * 0.07,
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 252, 254, 244)),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.shopping_bag_rounded,
-                            color: ColorExtension.primaryColor,
-                            size: 35,
-                          ),
-                          SizedBox(
-                            width: size.width * 0.15,
-                          ),
-                          Text(
-                            'My Orders',
-                            style: TextStyle(
+                      child: InkWell(
+                        onTap: showSnackbar,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.shopping_bag_rounded,
+                              color: ColorExtension.primaryColor,
+                              size: 35,
+                            ),
+                            SizedBox(
+                              width: size.width * 0.15,
+                            ),
+                            Text(
+                              'My Orders',
+                              style: TextStyle(
+                                color: ColorExtension.primarytextColor,
+                                fontFamily: 'poppins',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Spacer(),
+                            IconButton(
+                              onPressed: showSnackbar,
+                              icon: Icon(
+                                Icons.arrow_forward_ios,
+                              ),
                               color: ColorExtension.primarytextColor,
-                              fontFamily: 'poppins',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
+                              iconSize: 20,
                             ),
-                          ),
-                          Spacer(),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.arrow_forward_ios,
-                            ),
-                            color: ColorExtension.primarytextColor,
-                            iconSize: 20,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -214,35 +239,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: size.height * 0.07,
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 252, 254, 244)),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.favorite_rounded,
-                            color: ColorExtension.primaryColor,
-                            size: 35,
-                          ),
-                          SizedBox(
-                            width: size.width * 0.15,
-                          ),
-                          Text(
-                            'My Wishlist',
-                            style: TextStyle(
+                      child: InkWell(
+                        onTap: showSnackbar,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.favorite_rounded,
+                              color: ColorExtension.primaryColor,
+                              size: 35,
+                            ),
+                            SizedBox(
+                              width: size.width * 0.15,
+                            ),
+                            Text(
+                              'My Wishlist',
+                              style: TextStyle(
+                                color: ColorExtension.primarytextColor,
+                                fontFamily: 'poppins',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Spacer(),
+                            IconButton(
+                              onPressed: showSnackbar,
+                              icon: Icon(
+                                Icons.arrow_forward_ios,
+                              ),
                               color: ColorExtension.primarytextColor,
-                              fontFamily: 'poppins',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
+                              iconSize: 20,
                             ),
-                          ),
-                          Spacer(),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.arrow_forward_ios,
-                            ),
-                            color: ColorExtension.primarytextColor,
-                            iconSize: 20,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -253,35 +281,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: size.height * 0.07,
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 252, 254, 244)),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.location_on_rounded,
-                            color: ColorExtension.primaryColor,
-                            size: 35,
-                          ),
-                          SizedBox(
-                            width: size.width * 0.15,
-                          ),
-                          Text(
-                            'Change Address',
-                            style: TextStyle(
+                      child: InkWell(
+                        onTap: showSnackbar,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.location_on_rounded,
+                              color: ColorExtension.primaryColor,
+                              size: 35,
+                            ),
+                            SizedBox(
+                              width: size.width * 0.15,
+                            ),
+                            Text(
+                              'Change Address',
+                              style: TextStyle(
+                                color: ColorExtension.primarytextColor,
+                                fontFamily: 'poppins',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Spacer(),
+                            IconButton(
+                              onPressed: showSnackbar,
+                              icon: Icon(
+                                Icons.arrow_forward_ios,
+                              ),
                               color: ColorExtension.primarytextColor,
-                              fontFamily: 'poppins',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
+                              iconSize: 20,
                             ),
-                          ),
-                          Spacer(),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.arrow_forward_ios,
-                            ),
-                            color: ColorExtension.primarytextColor,
-                            iconSize: 20,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
