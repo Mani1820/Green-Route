@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
-import 'package:green_route/Screen/Onboarding/Login/login_screen.dart';
-import 'package:green_route/Screen/home/view/tab_screen.dart';
+import 'package:green_route/Customer/Screen/Onboarding/Login/login_screen.dart';
+import 'package:green_route/Customer/Screen/home/view/tab_screen.dart';
 
-import '../../../Common_Widget/rounded_button.dart';
+import '../../../../Common_Widget/rounded_button.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

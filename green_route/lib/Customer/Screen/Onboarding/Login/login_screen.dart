@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_button.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
-import 'package:green_route/Screen/Onboarding/Signup/signup_screen.dart';
-import 'package:green_route/Screen/home/view/tab_screen.dart';
+import 'package:green_route/Customer/Screen/Onboarding/Signup/signup_screen.dart';
+import 'package:green_route/Customer/Screen/home/view/tab_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

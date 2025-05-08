@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
-import 'package:green_route/Screen/home/view/tab_screen.dart';
+import 'package:green_route/Customer/Screen/home/view/tab_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});

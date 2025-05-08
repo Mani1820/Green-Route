@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_button.dart';
-import 'package:green_route/Screen/Onboarding/intro_screen.dart';
+import 'package:green_route/Customer/Screen/Onboarding/intro_screen.dart';
 
 class StartingScreen extends StatefulWidget {
   const StartingScreen({super.key});

@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
-import 'package:green_route/Screen/Onboarding/Login/login_screen.dart';
-import 'package:green_route/Screen/Profile/views/edit_profile_screen.dart';
+import 'package:green_route/Customer/Screen/Onboarding/Login/login_screen.dart';
+import 'package:green_route/Customer/Screen/Profile/views/edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

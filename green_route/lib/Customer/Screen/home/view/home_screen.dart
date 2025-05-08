@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
 import 'package:green_route/Data/banner_data.dart';
-import 'package:green_route/Screen/Category/views/category_screen.dart';
-import 'package:green_route/Screen/home/widgets/featured_products.dart';
-import 'package:green_route/Screen/product/views/product_detail_screen.dart';
+import 'package:green_route/Customer/Screen/Category/views/category_screen.dart';
+import 'package:green_route/Customer/Screen/home/widgets/featured_products.dart';
+import 'package:green_route/Customer/Screen/product/views/product_detail_screen.dart';
 import 'package:green_route/core/provider/products_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {

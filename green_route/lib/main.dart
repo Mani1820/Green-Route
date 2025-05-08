@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:green_route/Screen/home/view/tab_screen.dart';
-import 'package:green_route/Screen/starting_screen.dart';
+import 'package:green_route/Customer/Screen/home/view/tab_screen.dart';
+import 'package:green_route/Customer/Screen/starting_screen.dart';
 import 'package:green_route/core/service/firebase_options.dart';
 
 Future<void> main() async {

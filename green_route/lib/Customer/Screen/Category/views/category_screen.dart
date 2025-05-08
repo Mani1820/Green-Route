@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:green_route/Common/color_extension.dart';
-import 'package:green_route/Screen/product/views/product_detail_screen.dart';
+import 'package:green_route/Customer/Screen/product/views/product_detail_screen.dart';
 import 'package:green_route/core/provider/products_provider.dart';
 
 class CategoryScreen extends ConsumerStatefulWidget {
