@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
+import 'package:green_route/Customer/Screen/Onboarding/roll_check_screen.dart';
 import 'package:green_route/Data/intro_screen_data.dart';
-import 'package:green_route/Customer/Screen/Onboarding/Login/login_screen.dart';
+//import 'package:green_route/Customer/Screen/Onboarding/Login/login_screen.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
@@ -109,7 +110,7 @@ class _IntroScreenState extends State<IntroScreen> {
                             curve: Curves.easeInCirc)
                         : Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => LoginScreen()),
+                                builder: (context) => RollCheckScreen()),
                             (route) => false);
                   },
                   style: ElevatedButton.styleFrom(

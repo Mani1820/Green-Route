@@ -16,7 +16,7 @@ class TabScreen extends StatefulWidget {
 
 class _TabScreenState extends State<TabScreen> {
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget bucketChild = HelpScreen();
+  Widget bucketChild = HomeScreen();
 
   int selectedIndex = 2;
   openSnackBar() {
