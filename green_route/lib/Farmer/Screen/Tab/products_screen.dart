@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
+import 'package:green_route/Farmer/Screen/Tab/widgets/drawer_widget.dart';
 
 class FarmerProductScreen extends StatefulWidget {
   const FarmerProductScreen({super.key});
@@ -13,6 +14,18 @@ class _FarmerProductScreenState extends State<FarmerProductScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        elevation: 4,
+        surfaceTintColor: ColorExtension.primaryColor,
+        title: Text(
+          'Products',
+          style: TextStyle(
+            fontFamily: 'poppins',
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
       floatingActionButton: Container(
         height: size.height * 0.06,
         width: size.width * 0.14,
@@ -30,20 +43,12 @@ class _FarmerProductScreenState extends State<FarmerProductScreen> {
         ),
       ),
       body: Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                'Products',
-                style: TextStyle(
-                  fontFamily: 'poppins',
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-        ],
+        children: [],
+      ),
+      drawer: DrawerWidget(
+        farmeremail:
+            'Mani', //-----------------should be changed dynamically------------------
+        farmername: 'Mani',
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
+import 'package:green_route/Farmer/Screen/Tab/widgets/drawer_widget.dart';
 
 class FarmerHomeScreen extends StatefulWidget {
   const FarmerHomeScreen({super.key});
@@ -44,27 +45,25 @@ class _FarmerHomeScreenState extends State<FarmerHomeScreen>
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        elevation: 4,
+        surfaceTintColor: ColorExtension.primaryColor,
+        title: Text(
+          'Welcome ',
+          style: TextStyle(
+            fontFamily: 'poppins',
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(size.height * 0.1),
+          preferredSize: Size.fromHeight(size.height * 0.06),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                child: Text(
-                  'Welcome ',
-                  style: TextStyle(
-                      fontFamily: 'poppins',
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
+                  horizontal: 70,
                 ),
                 child: Text(
                   'location',
@@ -75,7 +74,7 @@ class _FarmerHomeScreenState extends State<FarmerHomeScreen>
                 ),
               ),
               SizedBox(
-                height: size.height * 0.05,
+                height: size.height * 0.02,
               ),
               TabBar(
                 tabs: tabs,
@@ -105,10 +104,23 @@ class _FarmerHomeScreenState extends State<FarmerHomeScreen>
               fit: BoxFit.cover,
             ),
           ),
-          child: currentIndex == 0
-              ? Center(child: Text('Pending Orders'))
-              : Center(child: Text('Confirmed Orders')),
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return currentIndex == 0
+                  ? pendingOrders.isEmpty
+                      ? Center(child: Text('Pending Orders'))
+                      : Center(child: Text('Pending Orders1'))
+                  : confirmedOrders.isEmpty
+                      ? Center(child: Text('Confirmed Orders'))
+                      : Center(child: Text('Confirmed Orders1'));
+            },
+          ),
         ),
+      ),
+      drawer: DrawerWidget(
+        farmeremail:
+            'Mani', //-----------------should be changed dynamically------------------
+        farmername: 'Mani',
       ),
     );
   }
