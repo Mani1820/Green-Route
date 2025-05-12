@@ -25,7 +25,7 @@ class RoundedButton extends StatelessWidget {
         onTap: onPressed,
         child: Container(
           width: double.infinity,
-          height: 60,
+          height: 55,
           decoration: BoxDecoration(
             color: type == ButtonType.primary
                 ? ColorExtension.primaryColor

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
+import 'package:green_route/Farmer/Screen/Drawer/profile_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget(
@@ -10,6 +11,11 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void onTapProfile() {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => FarmerProfileScreen()));
+    }
+
     var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Drawer(
@@ -29,45 +35,48 @@ class DrawerWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 10,
-                        ),
-                        child: CircleAvatar(
-                          radius: 50,
-                          backgroundColor: ColorExtension.primaryColor,
-                          child: Icon(
-                            Icons.person,
-                            size: 50,
-                            color: Colors.white,
+                  GestureDetector(
+                    onTap: onTapProfile,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 10,
                           ),
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            farmername,
-                            style: TextStyle(
-                              fontFamily: 'poppins',
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
+                          child: CircleAvatar(
+                            radius: 50,
+                            backgroundColor: ColorExtension.primaryColor,
+                            child: Icon(
+                              Icons.person,
+                              size: 50,
+                              color: Colors.white,
                             ),
                           ),
-                          Text(
-                            farmeremail,
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              fontFamily: 'poppins',
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              farmername,
+                              style: TextStyle(
+                                fontFamily: 'poppins',
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                            Text(
+                              farmeremail,
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontFamily: 'poppins',
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),

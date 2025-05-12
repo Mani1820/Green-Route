@@ -18,12 +18,12 @@ class _FarmerInsightsScreenState extends State<FarmerInsightsScreen> {
 
   final List<Saleschart> chartData = [
     Saleschart(day: '1', sales: 30),
-    Saleschart(day: '2', sales: 40),
+    Saleschart(day: '2', sales: 20),
     Saleschart(day: '3', sales: 50),
-    Saleschart(day: '4', sales: 60),
+    Saleschart(day: '4', sales: 10),
     Saleschart(day: '5', sales: 70),
-    Saleschart(day: '6', sales: 80),
-    Saleschart(day: '7', sales: 90),
+    Saleschart(day: '6', sales: 30),
+    Saleschart(day: '7', sales: 40),
   ];
 
   @override
@@ -106,7 +106,6 @@ class _FarmerInsightsScreenState extends State<FarmerInsightsScreen> {
               height: size.height * 0.6,
               child: SfCartesianChart(
                 tooltipBehavior: _tooltipBehavior,
-
                 primaryXAxis: const CategoryAxis(
                   interval: 2,
                   majorGridLines: MajorGridLines(width: 0),
@@ -114,7 +113,7 @@ class _FarmerInsightsScreenState extends State<FarmerInsightsScreen> {
                   labelStyle: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 primaryYAxis: NumericAxis(
-                  labelFormat: '{value}k',
+                  labelFormat: '{value}',
                   numberFormat: NumberFormat.compact(),
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
