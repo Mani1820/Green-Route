@@ -203,31 +203,25 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   ],
                                 ),
                                 child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: Text(
-                                        'Total price',
-                                        style: TextStyle(
-                                          fontFamily: 'poppins',
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16,
-                                          color:
-                                              ColorExtension.primarytextColor,
-                                        ),
+                                    Text(
+                                      'Total price',
+                                      style: TextStyle(
+                                        fontFamily: 'poppins',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                        color: ColorExtension.primarytextColor,
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: 20, left: 10, right: 10),
-                                      child: Text(
-                                        'Rs. ${productPrice.toString()}',
-                                        style: TextStyle(
-                                          fontFamily: 'poppins',
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 20,
-                                          color: ColorExtension.primaryColor,
-                                        ),
+                                    Text(
+                                      'Rs. ${productPrice.toString()}',
+                                      style: TextStyle(
+                                        fontFamily: 'poppins',
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 20,
+                                        color: ColorExtension.primaryColor,
                                       ),
                                     ),
                                     ElevatedButton(

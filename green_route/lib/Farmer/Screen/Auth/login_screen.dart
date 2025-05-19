@@ -80,7 +80,7 @@ class _FarmerLoginScreenState extends State<FarmerLoginScreen> {
             child: SingleChildScrollView(
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: size.width * 0.07),
-                height: size.height * 0.6,
+                height: size.height * 0.65,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(110, 255, 255, 255),
@@ -167,7 +167,7 @@ class _FarmerLoginScreenState extends State<FarmerLoginScreen> {
                               onTap: () {},
                               child: Container(
                                 width: size.width * 1,
-                                height: size.height * 0.055,
+                                height: size.height * 0.065,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(25),
                                   color: const Color.fromARGB(255, 188, 44, 34),
@@ -209,7 +209,8 @@ class _FarmerLoginScreenState extends State<FarmerLoginScreen> {
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FarmerSignUpScreen()),
+                                    builder: (context) =>
+                                        const FarmerSignUpScreen()),
                                 (_) => false);
                           },
                           child: Text(

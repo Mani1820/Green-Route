@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
+import 'package:green_route/Customer/Screen/Auth/roll_check_screen.dart';
 import 'package:green_route/Farmer/Screen/Drawer/profile_screen.dart';
 
-class DrawerWidget extends StatelessWidget {
+class DrawerWidget extends StatefulWidget {
   const DrawerWidget(
       {super.key, required this.farmername, required this.farmeremail});
 
@@ -10,12 +12,41 @@ class DrawerWidget extends StatelessWidget {
   final String farmeremail;
 
   @override
-  Widget build(BuildContext context) {
-    void onTapProfile() {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => FarmerProfileScreen()));
-    }
+  State<DrawerWidget> createState() => _DrawerWidgetState();
+}
 
+class _DrawerWidgetState extends State<DrawerWidget> {
+  Future<void> onTapLogout() async {
+    await FirebaseAuth.instance.signOut();
+    if (mounted) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => RollCheckScreen()),
+          (_) => false);
+    }
+  }
+
+  void onTapProfile() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => FarmerProfileScreen()));
+  }
+
+  void showSnackBar(String message) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        style: TextStyle(
+          fontFamily: 'poppins',
+        ),
+      ),
+      behavior: SnackBarBehavior.floating,
+      duration: Duration(seconds: 2),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Drawer(
@@ -29,7 +60,7 @@ class DrawerWidget extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: size.height * 0.15,
+              height: size.height * 0.17,
               width: size.width,
               color: ColorExtension.secondaryColor,
               child: Column(
@@ -57,7 +88,7 @@ class DrawerWidget extends StatelessWidget {
                         Column(
                           children: [
                             Text(
-                              farmername,
+                              widget.farmername,
                               style: TextStyle(
                                 fontFamily: 'poppins',
                                 fontSize: 20,
@@ -65,7 +96,7 @@ class DrawerWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              farmeremail,
+                              widget.farmeremail,
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontFamily: 'poppins',
@@ -94,6 +125,7 @@ class DrawerWidget extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              onTap: () => showSnackBar('This feature is coming soon'),
             ),
             Divider(
               thickness: 1,
@@ -112,6 +144,7 @@ class DrawerWidget extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              onTap: () => showSnackBar('This feature is coming soon'),
             ),
             Divider(
               thickness: 1,
@@ -130,6 +163,7 @@ class DrawerWidget extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              onTap: () => showSnackBar('This feature is coming soon'),
             ),
             Divider(
               thickness: 1,
@@ -148,6 +182,7 @@ class DrawerWidget extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              onTap: () => showSnackBar('This feature is coming soon'),
             ),
             Divider(
               thickness: 1,
@@ -166,6 +201,7 @@ class DrawerWidget extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              onTap: onTapLogout,
             ),
           ],
         ),

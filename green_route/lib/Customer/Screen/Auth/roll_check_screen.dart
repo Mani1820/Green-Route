@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_button.dart';
-import 'package:green_route/Customer/Screen/Onboarding/Login/login_screen.dart';
+import 'package:green_route/Customer/Screen/Auth/Login/login_screen.dart';
 import 'package:green_route/Farmer/Screen/Auth/login_screen.dart';
 
 class RollCheckScreen extends StatefulWidget {

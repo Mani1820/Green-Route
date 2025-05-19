@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
-import 'package:green_route/Customer/Screen/Onboarding/roll_check_screen.dart';
+import 'package:green_route/Customer/Screen/Auth/roll_check_screen.dart';
 import 'package:green_route/Data/intro_screen_data.dart';
 //import 'package:green_route/Customer/Screen/Onboarding/Login/login_screen.dart';
 

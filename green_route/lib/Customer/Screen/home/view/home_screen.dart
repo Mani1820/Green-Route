@@ -1,3 +1,5 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:green_route/Common/color_extension.dart';
@@ -16,6 +18,23 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  String? documentId;
+  String username = "";
+
+  Future<String?> getUserData() async {
+    DocumentSnapshot buyer = await FirebaseFirestore.instance
+        .collection('buyer')
+        .doc(documentId!)
+        .get();
+
+    if (buyer.exists) {
+      // Map<String, dynamic> data = buyer.data() as Map<String, dynamic>;
+      return buyer['Name'];
+    } else {
+      return null;
+    }
+  }
+
   void _onTapCatagory(String category) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => CategoryScreen(
@@ -40,15 +59,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ));
   }
 
-  final controller = PageController(viewportFraction: 0.9);
+  final controller = CarouselSliderController();
   var currentBanner = 0;
   @override
   void initState() {
-    controller.addListener(() {
-      setState(() {
-        currentBanner = controller.page?.floor() ?? 1;
-      });
-    });
     super.initState();
   }
 
@@ -68,7 +82,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   horizontal: 20,
                 ),
                 child: Text(
-                  'Welcome User!',
+                  'Welcome $username!',
                   style: TextStyle(
                     fontSize: 27,
                     fontWeight: FontWeight.w600,
@@ -93,25 +107,43 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               Center(
                   child: SizedBox(
                 height: size.height * 0.3,
-                child: PageView.builder(
+                child: CarouselSlider.builder(
+                  options: CarouselOptions(
+                    viewportFraction: 0.8,
+                    aspectRatio: 2.0,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 3),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
                     scrollDirection: Axis.horizontal,
-                    controller: controller,
-                    itemCount: bannerData.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.all(10),
-                        width: size.width * 0.9,
-                        height: size.height * 0.3,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              bannerData.elementAt(index)['image'],
-                            ),
-                            fit: BoxFit.cover,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        currentBanner = index;
+                      });
+                    },
+                  ),
+                  carouselController: controller,
+                  itemCount: bannerData.length,
+                  itemBuilder: (context, index, realIndex) {
+                    return Container(
+                      margin: const EdgeInsets.all(10),
+                      width: size.width * 0.9,
+                      height: size.height * 0.3,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            bannerData.elementAt(index)['image'],
                           ),
+                          fit: BoxFit.cover,
                         ),
-                      );
-                    }),
+                      ),
+                    );
+                  },
+                ),
               )),
               SizedBox(
                 height: size.height * 0.02,

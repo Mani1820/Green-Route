@@ -1,10 +1,14 @@
+// ignore_for_file: avoid_print
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
 import 'package:green_route/Common_Widget/rounded_text_field.dart';
-import 'package:green_route/Customer/Screen/Onboarding/Login/login_screen.dart';
+import 'package:green_route/Customer/Screen/Auth/Login/login_screen.dart';
 import 'package:green_route/Customer/Screen/home/view/tab_screen.dart';
 
+import '../../../../Auth/checking_email.dart';
 import '../../../../Common_Widget/rounded_button.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -21,6 +25,8 @@ class _SignupScreenState extends State<SignupScreen> {
   final _confirmPasswordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  bool? isUserCreated;
+  bool isLoading = false;
 
   String? _nameValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -61,20 +67,109 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Future<void> _signupWithEmailAndPassword() async {
+    String email = _emailController.text.trim();
+    bool isEmailExists = await checkIfEmailExists(email);
+
+    setState(() {
+      isLoading = true;
+    });
+
+    if (isEmailExists) {
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Email already exists'),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      }
+      return;
+    }
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+
+      isUserCreated = true;
     } on FirebaseAuthException catch (e) {
+      print(e.message);
+      print(e.message);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              e.toString(),
+              e.message.toString(),
             ),
           ),
         );
+      }
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  Future<void> storeUserData() async {
+    try {
+      User? buyer = FirebaseAuth.instance.currentUser;
+
+      if (buyer != null) {
+        isUserCreated = true;
+      } else {
+        throw Exception('User not created');
+      }
+
+      if (isUserCreated!) {
+        CollectionReference buyer =
+            FirebaseFirestore.instance.collection('buyer');
+
+        DocumentReference docRef = await buyer.add({
+          'Name': _nameController.text.trim(),
+          'Email': _emailController.text.trim(),
+          'password': _passwordController.text.trim(),
+          'userType': 'buyer',
+          'buyerId': buyer.id,
+        });
+        print("Document added with ID: ${docRef.id}");
+        print("Document added with ID: ${docRef.id}");
+
+        if (mounted) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const TabScreen(),
+            ),
+            (route) => false,
+          );
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Registration successful!'),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      print(e.toString());
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Error occurred: please try again',
+            ),
+          ),
+        );
+        print(e.toString());
       }
     }
   }
@@ -85,6 +180,7 @@ class _SignupScreenState extends State<SignupScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+
     super.dispose();
   }
 
@@ -172,24 +268,21 @@ class _SignupScreenState extends State<SignupScreen> {
                         SizedBox(
                           height: size.height * 0.015,
                         ),
-                        RoundedButton(
-                          title: 'Sign up',
-                          type: ButtonType.primary,
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              await _signupWithEmailAndPassword();
+                        isLoading
+                            ? CircularProgressIndicator()
+                            : RoundedButton(
+                                title: 'Sign up',
+                                type: ButtonType.primary,
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    _formKey.currentState!.save();
 
-                              Navigator.pushAndRemoveUntil(
-                                // ignore: use_build_context_synchronously
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const TabScreen(),
-                                ),
-                                (route) => false,
-                              );
-                            }
-                          },
-                        ),
+                                    await _signupWithEmailAndPassword();
+                                    await storeUserData();
+                                  }
+                                  return;
+                                },
+                              ),
                         SizedBox(
                           height: size.height * 0.015,
                         ),

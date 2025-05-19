@@ -70,7 +70,7 @@ class _FarmerSignUpScreenState extends State<FarmerSignUpScreen> {
               child: Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: size.width * 0.07),
-                height: size.height * 0.7,
+                height: size.height * 0.78,
                 decoration: BoxDecoration(
                   color: Colors.white.withAlpha(120),
                   borderRadius: BorderRadius.circular(30),
