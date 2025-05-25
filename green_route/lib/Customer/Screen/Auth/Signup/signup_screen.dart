@@ -94,11 +94,22 @@ class _SignupScreenState extends State<SignupScreen> {
       return;
     }
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+     UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
 
+      String userId = userCredential.user!.uid;
+      CollectionReference buyers =
+            FirebaseFirestore.instance.collection('buyer');
+
+       await buyers.add({
+          'Name': _nameController.text.trim(),
+          'Email': _emailController.text.trim(),
+          'password': _passwordController.text.trim(),
+          'userType': 'buyer',
+          'buyerId': userId,
+        });
       isUserCreated = true;
     } on FirebaseAuthException catch (e) {
       print(e.message);
@@ -121,27 +132,14 @@ class _SignupScreenState extends State<SignupScreen> {
 
   Future<void> storeUserData() async {
     try {
-      User? buyer = FirebaseAuth.instance.currentUser;
+      
 
-      if (buyer != null) {
-        isUserCreated = true;
-      } else {
-        throw Exception('User not created');
-      }
+      isUserCreated = true;
 
       if (isUserCreated!) {
-        CollectionReference buyer =
-            FirebaseFirestore.instance.collection('buyer');
-
-        DocumentReference docRef = await buyer.add({
-          'Name': _nameController.text.trim(),
-          'Email': _emailController.text.trim(),
-          'password': _passwordController.text.trim(),
-          'userType': 'buyer',
-          'buyerId': buyer.id,
-        });
-        print("Document added with ID: ${docRef.id}");
-        print("Document added with ID: ${docRef.id}");
+        
+        // print("Document added with ID: ${docRef.id}");
+        // print("Document added with ID: ${docRef.id}");
 
         if (mounted) {
           Navigator.pushAndRemoveUntil(

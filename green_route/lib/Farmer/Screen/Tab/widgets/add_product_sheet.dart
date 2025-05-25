@@ -206,11 +206,34 @@ class _AddProductSheetState extends State<AddProductSheet> {
                   validator: productDescriptionValidator,
                 ),
                 Textlable(text: 'Address'),
-                RoundedTextField(
-                  hintText: 'Address',
-                  controller: locationController,
-                  validator: productLocationValidator,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.location_on_outlined,
+                          color: ColorExtension.primaryColor,
+                        ),
+                      ),
+                      Text(
+                        'Choose Location',
+                        style: TextStyle(
+                          fontFamily: 'poppins',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: ColorExtension.primarytextColor,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                // RoundedTextField(
+                //   hintText: 'Address',
+                //   controller: locationController,
+                //   validator: productLocationValidator,
+                // ),
                 Textlable(text: 'Catagory'),
                 SizedBox(
                   height: size.height * 0.02,

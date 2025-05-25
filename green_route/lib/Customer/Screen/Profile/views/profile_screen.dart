@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:green_route/Common/color_extension.dart';
-import 'package:green_route/Customer/Screen/Auth/Login/login_screen.dart';
 import 'package:green_route/Customer/Screen/Profile/views/edit_profile_screen.dart';
+
+import '../../Auth/roll_check_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -14,7 +15,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   void logout() {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        MaterialPageRoute(builder: (context) => const RollCheckScreen()),
         (route) => false);
     FirebaseAuth.instance.signOut();
   }

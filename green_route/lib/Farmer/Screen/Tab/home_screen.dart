@@ -65,12 +65,23 @@ class _FarmerHomeScreenState extends State<FarmerHomeScreen>
                 padding: const EdgeInsets.symmetric(
                   horizontal: 70,
                 ),
-                child: Text(
-                  'location',
-                  style: TextStyle(
-                      fontFamily: 'poppins',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Row(
+                    children: [
+                      Text(
+                        'location',
+                        style: TextStyle(
+                            fontFamily: 'poppins',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: ColorExtension.primaryColor,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -108,10 +119,10 @@ class _FarmerHomeScreenState extends State<FarmerHomeScreen>
             builder: (context, setState) {
               return currentIndex == 0
                   ? pendingOrders.isEmpty
-                      ? Center(child: Text('Pending Orders'))
+                      ? Center(child: Text('No Pending Orders'))
                       : Center(child: Text('Pending Orders1'))
                   : confirmedOrders.isEmpty
-                      ? Center(child: Text('Confirmed Orders'))
+                      ? Center(child: Text('No Confirmed Orders'))
                       : Center(child: Text('Confirmed Orders1'));
             },
           ),
